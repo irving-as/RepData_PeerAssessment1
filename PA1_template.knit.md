@@ -44,6 +44,11 @@ spd <- tapply(activity$steps, activity$date, sum, na.rm = TRUE)
 
 2. Histogram of the total number of steps taken each day
 
+
+```r
+barplot(spd, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps")
+```
+
 <img src="figures/histogram-1.png" title="" alt="" width="672" />
 
 3. Mean and median of the total number of steps taken per day
@@ -63,6 +68,11 @@ median <- median(spd)
 
 ```r
 spd1 <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
+```
+
+
+```r
+plot(names(spd1), spd1, type = "l", xlab = "Interval", ylab = "Average steps over all days")
 ```
 
 <img src="figures/plot1-1.png" title="" alt="" width="672" />
@@ -113,7 +123,16 @@ for (i in 1:length(activity$steps)) {
 spd2 <- tapply(activity$steps, activity$date, sum)
 ```
 
+
+```r
+barplot(spd2, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps (with NAs replaced)")
+```
+
 <img src="figures/hist2-1.png" title="" alt="" width="672" />
+
+```r
+options(scipen=999)
+```
 
 
 ```r
