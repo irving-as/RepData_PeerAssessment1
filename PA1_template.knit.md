@@ -44,7 +44,7 @@ spd <- tapply(activity$steps, activity$date, sum, na.rm = TRUE)
 
 2. Histogram of the total number of steps taken each day
 
-<img src="PA1_template_files/figure-html/histogram-1.png" title="" alt="" width="672" />
+<img src="figures/histogram-1.png" title="" alt="" width="672" />
 
 3. Mean and median of the total number of steps taken per day
 
@@ -65,7 +65,7 @@ median <- median(spd)
 spd1 <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
 ```
 
-<img src="PA1_template_files/figure-html/plot1-1.png" title="" alt="" width="672" />
+<img src="figures/plot1-1.png" title="" alt="" width="672" />
 
 2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
@@ -113,7 +113,7 @@ for (i in 1:length(activity$steps)) {
 spd2 <- tapply(activity$steps, activity$date, sum)
 ```
 
-<img src="PA1_template_files/figure-html/hist2-1.png" title="" alt="" width="672" />
+<img src="figures/hist2-1.png" title="" alt="" width="672" />
 
 
 ```r
@@ -164,4 +164,4 @@ plot(unique(aggdata$Group.1), aggdata$x[aggdata$Group.2 == "weekday"], xlab = "I
 plot(x = unique(aggdata$Group.1), y = aggdata$x[aggdata$Group.2 == "weekend"], xlab = "Interval", ylab = "Average steps", main = "Weekends", type = "l")
 ```
 
-<img src="PA1_template_files/figure-html/plot2-1.png" title="" alt="" width="672" />
+<img src="figures/plot2-1.png" title="" alt="" width="672" />

@@ -33,7 +33,7 @@ spd <- tapply(activity$steps, activity$date, sum, na.rm = TRUE)
 
 2. Histogram of the total number of steps taken each day
 
-```{r histogram, echo = FALSE}
+```{r histogram, echo = FALSE, fig.path = "figures/"}
 barplot(spd, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps")
 ```
 
@@ -54,7 +54,7 @@ median <- median(spd)
 spd1 <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
 ```
 
-```{r plot1, echo = FALSE}
+```{r plot1, echo = FALSE, fig.path = "figures/"}
 plot(names(spd1), spd1, type = "l", xlab = "Interval", ylab = "Average steps over all days")
 ```
 
@@ -96,7 +96,7 @@ for (i in 1:length(activity$steps)) {
 spd2 <- tapply(activity$steps, activity$date, sum)
 ```
 
-```{r hist2, echo = FALSE}
+```{r hist2, echo = FALSE, fig.path = "figures/"}
 barplot(spd2, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps (with NAs replaced)")
 options(scipen=999)
 ```
@@ -131,7 +131,7 @@ activity$weekday[weekdays(activity$date) == "Saturday" | weekdays(activity$date)
 
 2. Panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
-```{r plot2}
+```{r plot2, fig.path = "figures/"}
 #Calculate the mean for every interval
 aggdata <- with(activity, aggregate(steps, by = list(interval, weekday), FUN = mean))
 par(mfrow = c(2,1))
