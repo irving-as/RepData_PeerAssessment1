@@ -10,7 +10,7 @@ output: html_document
 ##Loading and preprocessing the data
 
 
-1. Load the data
+* Load the data
 
 
 ```r
@@ -34,7 +34,7 @@ summary(activity)
 
 Missing values in the dataset are ignored.
 
-1. Total number of steps taken per day
+* Total number of steps taken per day
 
 
 ```r
@@ -42,16 +42,22 @@ Missing values in the dataset are ignored.
 spd <- tapply(activity$steps, activity$date, sum, na.rm = TRUE)
 ```
 
-2. Histogram of the total number of steps taken each day
+* Histogram of the total number of steps taken each day
 
+
+```r
+hist(spd, main = "Steps per day")
+```
+
+<img src="figures/histogram-1.png" title="" alt="" width="672" />
 
 ```r
 barplot(spd, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps")
 ```
 
-<img src="figures/histogram-1.png" title="" alt="" width="672" />
+<img src="figures/histogram-2.png" title="" alt="" width="672" />
 
-3. Mean and median of the total number of steps taken per day
+* Mean and median of the total number of steps taken per day
 
 
 ```r
@@ -63,7 +69,7 @@ median <- median(spd)
 
 ##What is the average daily activity pattern?
 
-1. Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged accros all days (y-axis)
+* Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged accros all days (y-axis)
 
 
 ```r
@@ -77,7 +83,7 @@ plot(names(spd1), spd1, type = "l", xlab = "Interval", ylab = "Average steps ove
 
 <img src="figures/plot1-1.png" title="" alt="" width="672" />
 
-2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+* Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 
 ```r
@@ -95,7 +101,7 @@ The maximum value is in the interval 835.
 
 There are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations of the data.
 
-1. Total number of missing values in the dataset
+* Total number of missing values in the dataset
 
 
 ```r
@@ -103,7 +109,7 @@ missing <- sum(is.na(activity$steps))
 ```
 The number of missing values is 2304.
 
-2. The missing values can be filled using the mean/median of the day on which the missing value appears
+* The missing values can be filled using the mean/median of the day on which the missing value appears
 
 
 ```r
@@ -116,7 +122,7 @@ for (i in 1:length(activity$steps)) {
 }
 ```
 
-3. New dataset, histogram, mean and median
+* New dataset, histogram, mean and median
 
 
 ```r
@@ -125,10 +131,16 @@ spd2 <- tapply(activity$steps, activity$date, sum)
 
 
 ```r
-barplot(spd2, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps (with NAs replaced)")
+hist(spd2, main = "Steps per day")
 ```
 
 <img src="figures/hist2-1.png" title="" alt="" width="672" />
+
+```r
+barplot(spd2, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps (with NAs replaced)")
+```
+
+<img src="figures/hist2-2.png" title="" alt="" width="672" />
 
 ```r
 options(scipen=999)
@@ -145,11 +157,10 @@ median <- median(spd2)
 
 The mean and median remain the same, because NA values were replaced with the mean.
 
-4. Histogram of the total number of steps taken each day.
 
 ##Are there differences in activity patterns between weekdays and weekends?
 
-1. Creating a  new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+* Creating a  new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
 
 ```r
@@ -170,7 +181,7 @@ levels(activity$weekday) = c("weekday","weekend")
 activity$weekday[weekdays(activity$date) == "Saturday" | weekdays(activity$date) == "Sunday"] <- "weekend"
 ```
 
-2. Panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+* Panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
 
 ```r

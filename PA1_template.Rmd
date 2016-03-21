@@ -12,7 +12,7 @@ output: html_document
 ##Loading and preprocessing the data
 
 
-1. Load the data
+* Load the data
 
 ```{r readData}
 activity <- read.csv("activity.csv")
@@ -24,20 +24,21 @@ summary(activity)
 
 Missing values in the dataset are ignored.
 
-1. Total number of steps taken per day
+* Total number of steps taken per day
 
 ```{r steps}
 #Calculate the total number of steps per day.
 spd <- tapply(activity$steps, activity$date, sum, na.rm = TRUE)
 ```
 
-2. Histogram of the total number of steps taken each day
+* Histogram of the total number of steps taken each day
 
 ```{r histogram, fig.path = "figures/"}
+hist(spd, main = "Steps per day")
 barplot(spd, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps")
 ```
 
-3. Mean and median of the total number of steps taken per day
+* Mean and median of the total number of steps taken per day
 
 ```{r meanmedian}
 mean <- mean(spd)
@@ -48,7 +49,7 @@ median <- median(spd)
 
 ##What is the average daily activity pattern?
 
-1. Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged accros all days (y-axis)
+* Time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged accros all days (y-axis)
 
 ```{r plot}
 spd1 <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
@@ -58,7 +59,7 @@ spd1 <- tapply(activity$steps, activity$interval, mean, na.rm = TRUE)
 plot(names(spd1), spd1, type = "l", xlab = "Interval", ylab = "Average steps over all days")
 ```
 
-2. Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+* Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 
 ```{r maxsteps}
 max <- names(which.max(spd1))
@@ -71,14 +72,14 @@ The maximum value is in the interval `r max`.
 
 There are a number of days/intervals where there are missing values (coded as NA). The presence of missing days may introduce bias into some calculations of the data.
 
-1. Total number of missing values in the dataset
+* Total number of missing values in the dataset
 
 ```{r missing}
 missing <- sum(is.na(activity$steps))
 ```
 The number of missing values is `r missing`.
 
-2. The missing values can be filled using the mean/median of the day on which the missing value appears
+* The missing values can be filled using the mean/median of the day on which the missing value appears
 
 ```{r replace}
 #Check to see if there are missing values
@@ -90,13 +91,14 @@ for (i in 1:length(activity$steps)) {
 }
 ```
 
-3. New dataset, histogram, mean and median
+* New dataset, histogram, mean and median
 
 ```{r newset}
 spd2 <- tapply(activity$steps, activity$date, sum)
 ```
 
 ```{r hist2, fig.path = "figures/"}
+hist(spd2, main = "Steps per day")
 barplot(spd2, las = 2, space = 0, cex.axis = .8, cex.names = 0.5, xlab = "Date", ylab = "Steps (with NAs replaced)")
 options(scipen=999)
 ```
@@ -111,11 +113,10 @@ median <- median(spd2)
 
 The mean and median remain the same, because NA values were replaced with the mean.
 
-4. Histogram of the total number of steps taken each day.
 
 ##Are there differences in activity patterns between weekdays and weekends?
 
-1. Creating a  new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
+* Creating a  new factor variable in the dataset with two levels - "weekday" and "weekend" indicating whether a given date is a weekday or weekend day.
 
 ```{r week}
 #Change the locale to english so that the weekdays function works (my system language isn't english)
@@ -129,7 +130,7 @@ activity$weekday[weekdays(activity$date) == "Saturday" | weekdays(activity$date)
 
 ```
 
-2. Panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
+* Panel plot containing a time series plot of the 5-minute interval (x-axis) and the average number of steps taken, averaged across all weekday days or weekend days (y-axis).
 
 ```{r plot2, fig.path = "figures/"}
 #Calculate the mean for every interval
